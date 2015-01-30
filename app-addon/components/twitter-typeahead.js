@@ -9,8 +9,6 @@ import Ember from "ember";
  * filterContent=filterContentFn
  * displayKey="somePropertyToDisplayStuff"
  * valueToken="somePropertyToFilterOn"
- * footerTemplate=somePropertyThatMapsToHandlebarsFunction
- * emptyTemplate=somePropertyThatMapsToHandlebarsFunction
  * on-select-without-match="someActionNameToHandleWhenThereIsn'tAMatchInTheList"
  *
  * }}
@@ -56,19 +54,7 @@ export default Ember.TextField.extend({
           return cb(content);
         }
         cb(this._filterContent(query));
-      }.bind(this),
-      templates: {
-        footer: function(object){
-          if (object.isEmpty) {
-            return '';
-          } else {
-            return '<span class="tt-suggestion enter-suggest">Footer</span>';
-          }
-        }.bind(this),
-        empty: function() {
-          return "<span class='tt-suggestion enter-suggest'>Empty</span>";
-        }.bind(this)
-      }
+      }.bind(this)
       /* jshint unused:false */
     }).on('typeahead:selected typeahead:autocompleted', Ember.run.bind(this, function(e, obj, dataSet){
       this.set('selection', obj);
